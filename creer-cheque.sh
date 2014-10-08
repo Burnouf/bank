@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 if [ $# -ne 4 ]; then
-    echo "Usage : ./create-check <facture> <emeteur> <ordre> <montant>";
+    echo "Usage : ./creer-cheque <facture> <emeteur> <ordre> <montant>";
     exit 1
 fi;
 

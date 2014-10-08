@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 if [ $# -ne 1 ]; then
-    echo "Usage : ./display-check <mon-cheque>";
+    echo "Usage : ./afficher-clair <mon-cheque>";
     exit 1
 fi;
 
