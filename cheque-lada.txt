@@ -1,4 +1,0 @@
-Facture : Facture pour la LADA
-Emeteur : Ben jamin haha
-Ordre : Concessionnaire LADA
-Montant : 120 €
