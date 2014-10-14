@@ -16,3 +16,6 @@
 ./afficher-cheque.sh cheque-lada.txt
 ./vendeur-verifie-le-clair.sh cheque-lada.txt "Facture pour la LADA" "Benjamin" "Concessionnaire LADA" "120 €"
 ```
+
+## Sources
+ * http://www.codealias.info/technotes/openssl_rsa_sign_and_verify_howto
