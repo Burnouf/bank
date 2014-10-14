@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 if [ $# -ne 1 ]; then
     echo "Usage : ./afficher-clair <mon-cheque>";
@@ -6,7 +6,6 @@ if [ $# -ne 1 ]; then
 fi;
 
 chemin_du_cheque="$1";
-
 facture=$(/bin/grep "Facture : " $chemin_du_cheque | /bin/sed -r 's/^Facture : (.*)$/\1/');
 emeteur=$(/bin/grep "Emeteur : " $chemin_du_cheque | /bin/sed -r 's/^Emeteur : (.*)$/\1/');
 ordre=$(/bin/grep "Ordre : " $chemin_du_cheque | /bin/sed -r 's/^Ordre : (.*)$/\1/');
