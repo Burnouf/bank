@@ -6,10 +6,21 @@ if [ $# -ne 5 ]; then
 fi;
 
 chemin_du_cheque="$1";
+entete=`/bin/grep "Entete : " $chemin_du_cheque | /bin/sed -r 's/^Entete : (.*)$/\1/'`;
 facture=`/bin/grep "Facture : " $chemin_du_cheque | /bin/sed -r 's/^Facture : (.*)$/\1/'`;
 emeteur=`/bin/grep "Emeteur : " $chemin_du_cheque | /bin/sed -r 's/^Emeteur : (.*)$/\1/'`;
 ordre=`/bin/grep "Ordre : " $chemin_du_cheque | /bin/sed -r 's/^Ordre : (.*)$/\1/'`;
 montant=`/bin/grep "Montant : " $chemin_du_cheque | /bin/sed -r 's/^Montant : (.*)$/\1/'`;
+
+
+./cheque-verifier-entete.sh $entete la-banque/public.pem > /dev/null;
+if [ $? -ne 0 ]; then
+    echo "Entête  : KO";
+    echo "Chèque  : KO";
+    exit 1
+else
+    echo "Entête  : OK"
+fi;
 
 if [ "$facture" != "$2" ]; then
     echo "Facture : KO";
