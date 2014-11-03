@@ -1,5 +1,8 @@
 # Transactions sécurisées par chèques
 
+Burnouf Benjamin, 
+Toulet Cyrille
+
 ## Exemple
 
 ```sh
@@ -50,7 +53,14 @@ cp cle-client cheque-a-deposer/cle-client
 
 # La banque verifie le cheque
 cd cheque-a-deposer/
-ls
+openssl dgst -sha256 < clair > hash1
+openssl rsautl -verify -inkey cle-vendeur -keyform PEM -pubin -in signe-vendeur > hash2
+diff -s hash1 hash2
+openssl dgst -sha256 < signe-vendeur > hash3
+openssl rsautl -verify -inkey cle-client -keyform PEM -pubin -in signe-client > hash4
+diff -s hash3 hash4
+
+# Si les hashs sont identiques, le cheque est encaissé
 ```
 
 ## Sources
