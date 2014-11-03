@@ -31,6 +31,26 @@ cp le-vendeur/public.pem cle-vendeur
 openssl rsautl -verify -inkey cle-vendeur -keyform PEM -pubin -in cheque-lada-signature-vendeur > hash2
 diff -s hash1 hash2
 
+# Le client re-signe à son tour le chèque (signé)
+openssl dgst -sha256 < cheque-lada-signature-vendeur > hash3
+openssl rsautl -sign -inkey le-client/private.pem -keyform PEM -in hash3 > cheque-lada-signature-client
+cp le-client/public.pem cle-client
+
+# Le vendeur vérifie le chèque avant que client ne s'en aille
+openssl rsautl -verify -inkey cle-client -keyform PEM -pubin -in cheque-lada-signature-client > hash4
+diff -s hash3 hash4
+
+# Le vendeur dépose le chèque à la banque
+mkdir cheque-a-deposer
+cp cheque-lada-clair cheque-a-deposer/clair
+cp cheque-lada-signature-vendeur cheque-a-deposer/signe-vendeur
+cp cheque-lada-signature-client cheque-a-deposer/signe-client
+cp cle-vendeur cheque-a-deposer/cle-vendeur
+cp cle-client cheque-a-deposer/cle-client
+
+# La banque verifie le cheque
+cd cheque-a-deposer/
+ls
 ```
 
 ## Sources
